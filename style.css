@@ -1,0 +1,194 @@
+body {
+  background: radial-gradient(circle at top, #0f2027, #203a43, #2c5364);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+.game-container {
+  width: 100%;
+  max-width: 900px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 25px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 0.6s ease;
+}
+
+h1 {
+  font-size: 2.8rem;
+  margin-bottom: 15px;
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.game-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+button:hover { transform: scale(1.08); }
+button:active { transform: scale(0.95); }
+
+.game-board {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 20px;
+}
+
+/* Tubes */
+.container {
+  width: 70px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 0 0 35px 35px;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.3s;
+  backdrop-filter: blur(6px);
+  position: relative;
+}
+.container.selected {
+  transform: translateY(-12px) scale(1.05);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.9);
+  border-color: #fff;
+}
+
+/* Liquids with wave */
+.liquid-layer {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  border-radius: 0 0 30px 30px;
+  transition: height 0.5s ease, bottom 0.5s ease;
+  overflow: hidden;
+}
+.liquid-layer::before,
+.liquid-layer::after {
+  content: "";
+  position: absolute;
+  top: -10%;
+  left: -25%;
+  width: 150%;
+  height: 150%;
+  background: inherit;
+  border-radius: 45%;
+  opacity: 0.7;
+  animation: wave 4s linear infinite;
+}
+.liquid-layer::after {
+  opacity: 0.4;
+  animation-duration: 6s;
+  animation-direction: reverse;
+}
+@keyframes wave {
+  0%   { transform: translateX(0) rotate(0deg); }
+  50%  { transform: translateX(-25%) rotate(180deg); }
+  100% { transform: translateX(0) rotate(360deg); }
+}
+.liquid-layer.pouring::before,
+.liquid-layer.pouring::after {
+  animation-duration: 2s;
+}
+
+/* Curved stream */
+#streamPath {
+  opacity: 0;
+}
+#streamPath.active {
+  opacity: 1;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  filter: drop-shadow(0 0 8px white);
+  animation: drawStream 0.6s ease forwards;
+}
+@keyframes drawStream {
+  0%   { stroke-dashoffset: 1000; stroke-width: 14; }
+  50%  { stroke-dashoffset: 0; stroke-width: 10; }
+  100% { stroke-dashoffset: 1000; stroke-width: 6; }
+}
+
+/* Splash */
+#splash-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+.splash {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: splashAnim 0.6s ease-out forwards;
+}
+@keyframes splashAnim {
+  from { transform: scale(0.5); opacity: 1; }
+  to   { transform: scale(1.5) translateY(-20px); opacity: 0; }
+}
+
+@keyframes splashAnim {
+  from { transform: scale(0.5); opacity: 1; }
+  to   { transform: scale(1.5) translateY(-20px); opacity: 0; }
+}
+
+/* Win message */
+.level-complete {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 20px 0;
+  color: #ffdd00;
+  text-shadow: 0 0 12px rgba(255, 221, 0, 0.9);
+  animation: pulse 1.6s infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container { width: 60px; height: 160px; }
+  h1 { font-size: 2.2rem; }
+}
+@media (max-width: 480px) {
+  .container { width: 50px; height: 130px; }
+  .game-board { gap: 15px; }
+}
+

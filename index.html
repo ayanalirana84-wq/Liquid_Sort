@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Liquid Sort Puzzle</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="game-container">
+    <h1>💧 Liquid Sort Puzzle</h1>
+    
+    <div class="game-info">
+      <div class="level">Level: <span id="level">1</span></div>
+      <div class="moves">Moves: <span id="moves">0</span></div>
+    </div>
+
+    <div class="controls">
+      <button id="undo">⤺ Undo</button>
+      <button id="restart">⟳ Restart</button>
+      <button id="hint">💡 Hint</button>
+      <button id="mute">🔇 Mute</button>
+    </div>
+
+    <div class="game-board" id="game-board"></div>
+    <div id="message"></div>
+  </div>
+
+  <div class="instructions">
+    <p>Tap a tube to select, then tap another to pour.</p>
+    <p>Goal: Each tube should contain a single liquid color.</p>
+  </div>
+  
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Liquid Sort Puzzle</title>
+  <link rel="stylesheet" href="style.css" />
+  
+<body>
+  <div about="game-container">
+    <p> Created by AyanAli</p>
+    <p> Contact: ayanalirana125@gmail.com</p>
+
+  <!-- Curved pour stream -->
+  <svg id="stream" width="100%" height="100%" style="position:fixed;top:0;left:0;pointer-events:none;">
+    <path id="streamPath" fill="none" stroke="transparent" stroke-width="12" stroke-linecap="round"/>
+  </svg>
+
+  <!-- Splash particles -->
+  <div id="splash-container"></div>
+
+  <!-- Sounds -->
+  <audio id="pour-sound" src="sounds/pour.mp3" preload="auto"></audio>
+  <audio id="splash-sound" src="sounds/splash.mp3" preload="auto"></audio>
+  <audio id="win-sound" src="sounds/win.mp3" preload="auto"></audio>
+  <audio id="click-sound" src="sounds/click.mp3" preload="auto"></audio>
+  <audio id="error-sound" src="sounds/error.mp3" preload="auto"></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
